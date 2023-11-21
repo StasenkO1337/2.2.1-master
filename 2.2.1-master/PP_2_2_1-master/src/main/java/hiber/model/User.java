@@ -21,11 +21,7 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    public User() {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
+    public User() { }
 
     public User(String firstName, String lastName, String email, Car car) {
         this.firstName = firstName;

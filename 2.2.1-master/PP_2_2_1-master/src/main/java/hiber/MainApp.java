@@ -29,7 +29,7 @@ public class MainApp {
          System.out.println(user);
       }
 
-      System.out.println("User with car s4 and series 4 is user with id => " + userService.getUserByCar("s4", 4).getId());
+      System.out.println("User with car s4 and series 4 is => " + userService.getUserByCar("s4", 4));
 
       context.close();
    }

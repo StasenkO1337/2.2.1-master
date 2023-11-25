@@ -1,8 +1,8 @@
 package hiber.dao;
 
+import hiber.model.Car;
 import hiber.model.User;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,18 +23,25 @@ public class UserDaoImp implements UserDao {
 
    @Override
    public User getUserByCar(String model, int series) {
-      String hql = "from User user where user.car.model = :model and user.car.series = :series";
-      TypedQuery<User> query = sessionFactory
-              .getCurrentSession()
-              .createQuery(hql)
-              .setParameter("model", model)
-              .setParameter("series", series);
-      return query.setMaxResults(1).getSingleResult();
+      TypedQuery<Car> queryCar = sessionFactory.getCurrentSession().createQuery("from Car" +
+              " where model=:model and series=:series");
+      queryCar.setParameter("model", model);
+      queryCar.setParameter("series", series);
+      User user = null;
+      try {
+         Car car = queryCar.getSingleResult();
+         TypedQuery<User> queryUser = sessionFactory.getCurrentSession().createQuery("from User where id=:id");
+         queryUser.setParameter("id", car.getUser().getId());
+         user = queryUser.getSingleResult();
+      } catch (NoResultException e) {
+         System.out.println(e.getMessage());
+      }
+      return user;
    }
 
    @Override
    public List<User> listUsers() {
-      TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User", User.class);
+      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
       return query.getResultList();
    }
 

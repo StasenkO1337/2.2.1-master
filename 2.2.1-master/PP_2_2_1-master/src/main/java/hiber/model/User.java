@@ -27,10 +27,11 @@ public class User {
 
     public User() {}
 
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName, String email, Car car) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.car = car;
     }
 
     public Long getId() {
@@ -76,10 +77,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return  "Id = " + id + "\n" +
+                "firstName = " + firstName + "\n" +
+                "lastName = " + lastName + "\n" +
+                "email = " + email + "\n" +
+                "car : " + car.toString() + "\n\n";
     }
 }

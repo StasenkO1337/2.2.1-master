@@ -26,6 +26,10 @@ public class AppConfig {
    @Autowired
    private Environment env;
 
+   public AppConfig(Environment environment){
+      this.env = environment;
+   }
+
    @Bean
    public DataSource getDataSource() {
       DriverManagerDataSource dataSource = new DriverManagerDataSource();
